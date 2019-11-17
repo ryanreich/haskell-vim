@@ -187,8 +187,13 @@ function! GetHaskellIndent()
     endif
   endif
 
+  " comma at end of previous line
+  if l:prevline =~ ',\s*$'
+    return indent(v:lnum - 1)
+  endif
+
   " operator at end of previous line
-  if l:prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
+  if l:prevline =~ '[{!#$%&*+./<>?@\\^|~-]\s*$'
     return indent(v:lnum - 1) + &shiftwidth
   endif
 

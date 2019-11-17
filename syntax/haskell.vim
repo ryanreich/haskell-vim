@@ -21,7 +21,7 @@ syn match haskellRecordField contained containedin=haskellBlock
   \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\_s\+::\_s"
   \ contains=
   \ haskellIdentifier,
-  \ haskellOperators,
+  \ haskellSpecialOperators,
   \ haskellSeparator,
   \ haskellParens
 syn match haskellTypeSig
@@ -31,7 +31,7 @@ syn match haskellTypeSig
   \ haskellLet,
   \ haskellDefault,
   \ haskellIdentifier,
-  \ haskellOperators,
+  \ haskellSpecialOperators,
   \ haskellSeparator,
   \ haskellParens
 syn keyword haskellWhere where
@@ -45,7 +45,7 @@ syn keyword haskellForeignKeywords foreign export import ccall safe unsafe inter
 syn region haskellForeignImport start="\<foreign\>" end="\_s\+::\s" keepend
   \ contains=
   \ haskellString,
-  \ haskellOperators,
+  \ haskellSpecialOperators,
   \ haskellForeignKeywords,
   \ haskellIdentifier
 syn match haskellImport "^\s*\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+\)\?.\+\(\s\+\<as\>\s\+.\+\)\?\(\s\+\<hiding\>\)\?"
@@ -72,6 +72,7 @@ syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=T
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
 syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
+syn match haskellSpecialOperators "=\|::\|->" 
 syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
 syn region haskellQuoted start="\<'\+" end="\>"
