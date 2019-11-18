@@ -72,7 +72,7 @@ syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=T
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
 syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
-syn match haskellSpecialOperators "=\|::\|->" 
+syn match haskellSpecialOperators "=>\|=\|::\|->\|<-" 
 syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
 syn region haskellQuoted start="\<'\+" end="\>"

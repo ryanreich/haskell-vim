@@ -187,13 +187,26 @@ function! GetHaskellIndent()
     endif
   endif
 
+  " indent closing brace, paren or bracket
+  if l:line =~ '^\s*}'
+    return s:indentMatching('}')
+  endif
+
+  if l:line =~ '^\s*)'
+    return s:indentMatching(')')
+  endif
+
+  if l:line =~ '^\s*]'
+    return s:indentMatching(']')
+  endif
+
   " comma at end of previous line
   if l:prevline =~ ',\s*$'
     return indent(v:lnum - 1)
   endif
 
   " operator at end of previous line
-  if l:prevline =~ '[{!#$%&*+./<>?@\\^|~-]\s*$'
+  if l:prevline =~ '[[({!#$%&*+./<>?@\\^|~-]\s*$'
     return indent(v:lnum - 1) + &shiftwidth
   endif
 
@@ -413,7 +426,7 @@ function! GetHaskellIndent()
   if l:line =~ '^\s*{'
     let l:s = indent(v:lnum - 1)
     if l:s >= 0
-      return l:s + &shiftwidth
+      return l:s + get(g:, 'haskell_indent_open_brace', &shiftwidth)
     endif
   endif
 
@@ -495,19 +508,6 @@ function! GetHaskellIndent()
   " >>:: Int
   if l:line =~ '^\s*::\s'
     return indent(v:lnum - 1) + &shiftwidth
-  endif
-
-  " indent closing brace, paren or bracket
-  if l:line =~ '^\s*}'
-    return s:indentMatching('}')
-  endif
-
-  if l:line =~ '^\s*)'
-    return s:indentMatching(')')
-  endif
-
-  if l:line =~ '^\s*]'
-    return s:indentMatching(']')
   endif
 
   return -1
